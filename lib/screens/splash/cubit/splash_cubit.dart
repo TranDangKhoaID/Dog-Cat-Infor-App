@@ -7,7 +7,7 @@ part 'splash_state.dart';
 part 'splash_cubit.freezed.dart';
 
 class SplashCubit extends Cubit<SplashState> {
-  SplashCubit() : super(SplashState.initial());
+  SplashCubit() : super(const SplashState.initial());
 
   /// Get configs
   Future<void> getConfigs() async {

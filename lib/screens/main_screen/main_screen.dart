@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
+import 'package:dog_cat_infor/screens/cat_screen/cat_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:dog_cat_infor/common/event_bus.dart';
 import 'package:dog_cat_infor/common/share_color.dart';
 import 'package:dog_cat_infor/common/share_style.dart';
 import 'package:dog_cat_infor/screens/main_screen/cubit/main_cubit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MainScreen extends StatefulWidget {
   /// MARK: - Initials;
@@ -31,9 +33,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
   /// MARK: - Initials;
   final screens = [
-    Container(
-      color: Colors.red,
-    ),
+    CatScreen.provider(),
     Container(
       color: Colors.green,
     ),
@@ -83,24 +83,24 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.person_4,
+                FontAwesomeIcons.cat,
                 size: 20,
               ),
-              label: 'Nhân vật',
+              label: 'Cat',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.home_filled,
+                FontAwesomeIcons.dog,
                 size: 20,
               ),
-              label: 'Anime/Manga',
+              label: 'Dog',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.settings,
                 size: 20,
               ),
-              label: 'Cài đặt',
+              label: 'Setting',
             ),
           ],
           currentIndex: tabIndex,
