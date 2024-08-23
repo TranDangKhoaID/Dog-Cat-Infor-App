@@ -1,3 +1,4 @@
+import 'package:dog_cat_infor/screens/cat_detail_screen/cat_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dog_cat_infor/screens/main_screen/main_screen.dart';
 import 'package:dog_cat_infor/screens/splash/splash_screen.dart';
@@ -6,7 +7,7 @@ class AppRoute {
   /// MARK: - Initials;
   static const String splashScreen = '/splash-screen';
   static const String mainScreen = '/main-screen';
-  //static const String detailCharacterScreen = '/detail-character-screen';
+  static const String detailCatScreen = '/detail-cat-screen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -20,11 +21,11 @@ class AppRoute {
           builder: (_) => MainScreen.provider(),
           settings: settings,
         );
-      // case detailCharacterScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const DetailCharacterScreen(),
-      //     settings: settings,
-      //   );
+      case detailCatScreen:
+        return MaterialPageRoute(
+          builder: (_) => CatDetailScreen.provider(),
+          settings: settings,
+        );
       default:
         return _errorRoute();
     }

@@ -3,10 +3,14 @@ import 'dart:async';
 import 'package:after_layout/after_layout.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_cat_infor/common/share_color.dart';
+import 'package:dog_cat_infor/extensions/strings.dart';
+import 'package:dog_cat_infor/screens/cat_detail_screen/cat_detail_screen.dart';
 import 'package:dog_cat_infor/screens/cat_screen/cubit/cat_cubit.dart';
 import 'package:dog_cat_infor/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class CatScreen extends StatefulWidget {
   static BlocProvider<CatCubit> provider() {
@@ -60,70 +64,84 @@ class _CatScreenState extends State<CatScreen> with AfterLayoutMixin {
             }
             final model = items[index];
 
-            return Container(
-              margin: const EdgeInsets.symmetric(
-                vertical: 5,
-                horizontal: 5,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        width: double.infinity,
-                        margin: const EdgeInsets.all(5),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: CachedNetworkImage(
-                            imageUrl:
-                                'https://cdn2.thecatapi.com/images/${model.reference_image_id}.jpg',
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) => const ShimmerImage(),
-                            errorWidget: (context, url, error) {
-                              // Thử với đuôi .png nếu .jpg có lỗi
-                              final pngUrl = url.replaceAll('.jpg', '.png');
-                              return CachedNetworkImage(
-                                imageUrl: pngUrl,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) =>
-                                    const ShimmerImage(),
-                                errorWidget: (context, url, error) => Icon(
-                                  Icons.error,
-                                ),
-                              );
-                            },
+            return GestureDetector(
+              onTap: () {
+                showMaterialModalBottomSheet(
+                  context: Get.context!,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) => CatDetailScreen.provider(
+                    cat: model,
+                  ),
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 5,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.all(5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: CachedNetworkImage(
+                              imageUrl: getCatUrlImageJPG(
+                                id: model.reference_image_id ?? '',
+                              ),
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) =>
+                                  const ShimmerImage(),
+                              errorWidget: (context, url, error) {
+                                // Thử với đuôi .png nếu .jpg có lỗi
+                                final pngUrl = url.replaceAll('.jpg', '.png');
+                                return CachedNetworkImage(
+                                  imageUrl: pngUrl,
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) =>
+                                      const ShimmerImage(),
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset(
+                                    'assets/images/cat.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      model.name ?? '',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: ShareColors.kPrimaryColor,
-                        fontFamily: 'PlaypenSans',
-                      ),
-                    ),
-                    const SizedBox(height: 3),
-                    Row(
-                      children: [
-                        const Icon(Icons.place_outlined, color: Colors.red),
-                        Flexible(
-                          child: Text(
-                            model.origin ?? 'No Origin',
-                            overflow: TextOverflow.clip,
-                          ),
+                      Text(
+                        model.name ?? '',
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ShareColors.kPrimaryColor,
+                          fontFamily: 'PlaypenSans',
                         ),
-                      ],
-                    )
-                  ],
+                      ),
+                      Row(
+                        children: [
+                          const Icon(Icons.place_outlined, color: Colors.red),
+                          Expanded(
+                            child: Text(
+                              model.origin ?? 'No Origin',
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             );

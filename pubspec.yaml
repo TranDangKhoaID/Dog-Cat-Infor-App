@@ -34,9 +34,10 @@ dependencies:
   dio: ^5.6.0
   retrofit: ^4.2.0
   retrofit_generator: ^8.2.0
-  supabase_flutter: ^2.6.0
   flutter_dotenv: ^5.1.0
   font_awesome_flutter: ^10.7.0
+  adaptive_theme: ^3.6.0
+  modal_bottom_sheet: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -47,15 +48,13 @@ dev_dependencies:
   json_serializable: ^6.8.0
 
 flutter:
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
     - .env
-  #   - images/a_dot_ham.jpeg
+    - assets/images/
+    - assets/fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
