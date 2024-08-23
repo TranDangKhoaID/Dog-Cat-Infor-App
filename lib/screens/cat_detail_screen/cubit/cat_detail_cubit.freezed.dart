@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CatDetailStateData {
   CatModel? get catDetail => throw _privateConstructorUsedError;
+  List<ImageCatModel> get images => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,7 @@ abstract class $CatDetailStateDataCopyWith<$Res> {
           CatDetailStateData value, $Res Function(CatDetailStateData) then) =
       _$CatDetailStateDataCopyWithImpl<$Res, CatDetailStateData>;
   @useResult
-  $Res call({CatModel? catDetail, bool isLoading});
+  $Res call({CatModel? catDetail, List<ImageCatModel> images, bool isLoading});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$CatDetailStateDataCopyWithImpl<$Res, $Val extends CatDetailStateData>
   @override
   $Res call({
     Object? catDetail = freezed,
+    Object? images = null,
     Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
@@ -54,6 +56,10 @@ class _$CatDetailStateDataCopyWithImpl<$Res, $Val extends CatDetailStateData>
           ? _value.catDetail
           : catDetail // ignore: cast_nullable_to_non_nullable
               as CatModel?,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ImageCatModel>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -70,7 +76,7 @@ abstract class _$$CatDetailStateDataImplCopyWith<$Res>
       __$$CatDetailStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({CatModel? catDetail, bool isLoading});
+  $Res call({CatModel? catDetail, List<ImageCatModel> images, bool isLoading});
 }
 
 /// @nodoc
@@ -85,6 +91,7 @@ class __$$CatDetailStateDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? catDetail = freezed,
+    Object? images = null,
     Object? isLoading = null,
   }) {
     return _then(_$CatDetailStateDataImpl(
@@ -92,6 +99,10 @@ class __$$CatDetailStateDataImplCopyWithImpl<$Res>
           ? _value.catDetail
           : catDetail // ignore: cast_nullable_to_non_nullable
               as CatModel?,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ImageCatModel>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -103,17 +114,30 @@ class __$$CatDetailStateDataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CatDetailStateDataImpl implements _CatDetailStateData {
-  const _$CatDetailStateDataImpl({this.catDetail, this.isLoading = false});
+  const _$CatDetailStateDataImpl(
+      {this.catDetail,
+      final List<ImageCatModel> images = const [],
+      this.isLoading = false})
+      : _images = images;
 
   @override
   final CatModel? catDetail;
+  final List<ImageCatModel> _images;
+  @override
+  @JsonKey()
+  List<ImageCatModel> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
+
   @override
   @JsonKey()
   final bool isLoading;
 
   @override
   String toString() {
-    return 'CatDetailStateData(catDetail: $catDetail, isLoading: $isLoading)';
+    return 'CatDetailStateData(catDetail: $catDetail, images: $images, isLoading: $isLoading)';
   }
 
   @override
@@ -123,12 +147,14 @@ class _$CatDetailStateDataImpl implements _CatDetailStateData {
             other is _$CatDetailStateDataImpl &&
             (identical(other.catDetail, catDetail) ||
                 other.catDetail == catDetail) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, catDetail, isLoading);
+  int get hashCode => Object.hash(runtimeType, catDetail,
+      const DeepCollectionEquality().hash(_images), isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -141,10 +167,13 @@ class _$CatDetailStateDataImpl implements _CatDetailStateData {
 abstract class _CatDetailStateData implements CatDetailStateData {
   const factory _CatDetailStateData(
       {final CatModel? catDetail,
+      final List<ImageCatModel> images,
       final bool isLoading}) = _$CatDetailStateDataImpl;
 
   @override
   CatModel? get catDetail;
+  @override
+  List<ImageCatModel> get images;
   @override
   bool get isLoading;
   @override
@@ -160,6 +189,7 @@ mixin _$CatDetailState {
   TResult when<TResult extends Object?>({
     required TResult Function(CatDetailStateData data) initial,
     required TResult Function(CatDetailStateData data) getCatDetail,
+    required TResult Function(CatDetailStateData data) getImagesCat,
     required TResult Function(CatDetailStateData data) isLoading,
   }) =>
       throw _privateConstructorUsedError;
@@ -167,6 +197,7 @@ mixin _$CatDetailState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(CatDetailStateData data)? initial,
     TResult? Function(CatDetailStateData data)? getCatDetail,
+    TResult? Function(CatDetailStateData data)? getImagesCat,
     TResult? Function(CatDetailStateData data)? isLoading,
   }) =>
       throw _privateConstructorUsedError;
@@ -174,6 +205,7 @@ mixin _$CatDetailState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(CatDetailStateData data)? initial,
     TResult Function(CatDetailStateData data)? getCatDetail,
+    TResult Function(CatDetailStateData data)? getImagesCat,
     TResult Function(CatDetailStateData data)? isLoading,
     required TResult orElse(),
   }) =>
@@ -182,6 +214,7 @@ mixin _$CatDetailState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(GetCatDetail value) getCatDetail,
+    required TResult Function(GetImages value) getImagesCat,
     required TResult Function(IsLoading value) isLoading,
   }) =>
       throw _privateConstructorUsedError;
@@ -189,6 +222,7 @@ mixin _$CatDetailState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(GetCatDetail value)? getCatDetail,
+    TResult? Function(GetImages value)? getImagesCat,
     TResult? Function(IsLoading value)? isLoading,
   }) =>
       throw _privateConstructorUsedError;
@@ -196,6 +230,7 @@ mixin _$CatDetailState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(GetCatDetail value)? getCatDetail,
+    TResult Function(GetImages value)? getImagesCat,
     TResult Function(IsLoading value)? isLoading,
     required TResult orElse(),
   }) =>
@@ -320,6 +355,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function(CatDetailStateData data) initial,
     required TResult Function(CatDetailStateData data) getCatDetail,
+    required TResult Function(CatDetailStateData data) getImagesCat,
     required TResult Function(CatDetailStateData data) isLoading,
   }) {
     return initial(data);
@@ -330,6 +366,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(CatDetailStateData data)? initial,
     TResult? Function(CatDetailStateData data)? getCatDetail,
+    TResult? Function(CatDetailStateData data)? getImagesCat,
     TResult? Function(CatDetailStateData data)? isLoading,
   }) {
     return initial?.call(data);
@@ -340,6 +377,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(CatDetailStateData data)? initial,
     TResult Function(CatDetailStateData data)? getCatDetail,
+    TResult Function(CatDetailStateData data)? getImagesCat,
     TResult Function(CatDetailStateData data)? isLoading,
     required TResult orElse(),
   }) {
@@ -354,6 +392,7 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(GetCatDetail value) getCatDetail,
+    required TResult Function(GetImages value) getImagesCat,
     required TResult Function(IsLoading value) isLoading,
   }) {
     return initial(this);
@@ -364,6 +403,7 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(GetCatDetail value)? getCatDetail,
+    TResult? Function(GetImages value)? getImagesCat,
     TResult? Function(IsLoading value)? isLoading,
   }) {
     return initial?.call(this);
@@ -374,6 +414,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(GetCatDetail value)? getCatDetail,
+    TResult Function(GetImages value)? getImagesCat,
     TResult Function(IsLoading value)? isLoading,
     required TResult orElse(),
   }) {
@@ -466,6 +507,7 @@ class _$GetCatDetailImpl implements GetCatDetail {
   TResult when<TResult extends Object?>({
     required TResult Function(CatDetailStateData data) initial,
     required TResult Function(CatDetailStateData data) getCatDetail,
+    required TResult Function(CatDetailStateData data) getImagesCat,
     required TResult Function(CatDetailStateData data) isLoading,
   }) {
     return getCatDetail(data);
@@ -476,6 +518,7 @@ class _$GetCatDetailImpl implements GetCatDetail {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(CatDetailStateData data)? initial,
     TResult? Function(CatDetailStateData data)? getCatDetail,
+    TResult? Function(CatDetailStateData data)? getImagesCat,
     TResult? Function(CatDetailStateData data)? isLoading,
   }) {
     return getCatDetail?.call(data);
@@ -486,6 +529,7 @@ class _$GetCatDetailImpl implements GetCatDetail {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(CatDetailStateData data)? initial,
     TResult Function(CatDetailStateData data)? getCatDetail,
+    TResult Function(CatDetailStateData data)? getImagesCat,
     TResult Function(CatDetailStateData data)? isLoading,
     required TResult orElse(),
   }) {
@@ -500,6 +544,7 @@ class _$GetCatDetailImpl implements GetCatDetail {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(GetCatDetail value) getCatDetail,
+    required TResult Function(GetImages value) getImagesCat,
     required TResult Function(IsLoading value) isLoading,
   }) {
     return getCatDetail(this);
@@ -510,6 +555,7 @@ class _$GetCatDetailImpl implements GetCatDetail {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(GetCatDetail value)? getCatDetail,
+    TResult? Function(GetImages value)? getImagesCat,
     TResult? Function(IsLoading value)? isLoading,
   }) {
     return getCatDetail?.call(this);
@@ -520,6 +566,7 @@ class _$GetCatDetailImpl implements GetCatDetail {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(GetCatDetail value)? getCatDetail,
+    TResult Function(GetImages value)? getImagesCat,
     TResult Function(IsLoading value)? isLoading,
     required TResult orElse(),
   }) {
@@ -539,6 +586,158 @@ abstract class GetCatDetail implements CatDetailState {
   @override
   @JsonKey(ignore: true)
   _$$GetCatDetailImplCopyWith<_$GetCatDetailImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetImagesImplCopyWith<$Res>
+    implements $CatDetailStateCopyWith<$Res> {
+  factory _$$GetImagesImplCopyWith(
+          _$GetImagesImpl value, $Res Function(_$GetImagesImpl) then) =
+      __$$GetImagesImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({CatDetailStateData data});
+
+  @override
+  $CatDetailStateDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$GetImagesImplCopyWithImpl<$Res>
+    extends _$CatDetailStateCopyWithImpl<$Res, _$GetImagesImpl>
+    implements _$$GetImagesImplCopyWith<$Res> {
+  __$$GetImagesImplCopyWithImpl(
+      _$GetImagesImpl _value, $Res Function(_$GetImagesImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$GetImagesImpl(
+      null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as CatDetailStateData,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetImagesImpl implements GetImages {
+  const _$GetImagesImpl(this.data);
+
+  @override
+  final CatDetailStateData data;
+
+  @override
+  String toString() {
+    return 'CatDetailState.getImagesCat(data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetImagesImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetImagesImplCopyWith<_$GetImagesImpl> get copyWith =>
+      __$$GetImagesImplCopyWithImpl<_$GetImagesImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(CatDetailStateData data) initial,
+    required TResult Function(CatDetailStateData data) getCatDetail,
+    required TResult Function(CatDetailStateData data) getImagesCat,
+    required TResult Function(CatDetailStateData data) isLoading,
+  }) {
+    return getImagesCat(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(CatDetailStateData data)? initial,
+    TResult? Function(CatDetailStateData data)? getCatDetail,
+    TResult? Function(CatDetailStateData data)? getImagesCat,
+    TResult? Function(CatDetailStateData data)? isLoading,
+  }) {
+    return getImagesCat?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CatDetailStateData data)? initial,
+    TResult Function(CatDetailStateData data)? getCatDetail,
+    TResult Function(CatDetailStateData data)? getImagesCat,
+    TResult Function(CatDetailStateData data)? isLoading,
+    required TResult orElse(),
+  }) {
+    if (getImagesCat != null) {
+      return getImagesCat(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(GetCatDetail value) getCatDetail,
+    required TResult Function(GetImages value) getImagesCat,
+    required TResult Function(IsLoading value) isLoading,
+  }) {
+    return getImagesCat(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(GetCatDetail value)? getCatDetail,
+    TResult? Function(GetImages value)? getImagesCat,
+    TResult? Function(IsLoading value)? isLoading,
+  }) {
+    return getImagesCat?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(GetCatDetail value)? getCatDetail,
+    TResult Function(GetImages value)? getImagesCat,
+    TResult Function(IsLoading value)? isLoading,
+    required TResult orElse(),
+  }) {
+    if (getImagesCat != null) {
+      return getImagesCat(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetImages implements CatDetailState {
+  const factory GetImages(final CatDetailStateData data) = _$GetImagesImpl;
+
+  @override
+  CatDetailStateData get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetImagesImplCopyWith<_$GetImagesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -613,6 +812,7 @@ class _$IsLoadingImpl implements IsLoading {
   TResult when<TResult extends Object?>({
     required TResult Function(CatDetailStateData data) initial,
     required TResult Function(CatDetailStateData data) getCatDetail,
+    required TResult Function(CatDetailStateData data) getImagesCat,
     required TResult Function(CatDetailStateData data) isLoading,
   }) {
     return isLoading(data);
@@ -623,6 +823,7 @@ class _$IsLoadingImpl implements IsLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(CatDetailStateData data)? initial,
     TResult? Function(CatDetailStateData data)? getCatDetail,
+    TResult? Function(CatDetailStateData data)? getImagesCat,
     TResult? Function(CatDetailStateData data)? isLoading,
   }) {
     return isLoading?.call(data);
@@ -633,6 +834,7 @@ class _$IsLoadingImpl implements IsLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(CatDetailStateData data)? initial,
     TResult Function(CatDetailStateData data)? getCatDetail,
+    TResult Function(CatDetailStateData data)? getImagesCat,
     TResult Function(CatDetailStateData data)? isLoading,
     required TResult orElse(),
   }) {
@@ -647,6 +849,7 @@ class _$IsLoadingImpl implements IsLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(GetCatDetail value) getCatDetail,
+    required TResult Function(GetImages value) getImagesCat,
     required TResult Function(IsLoading value) isLoading,
   }) {
     return isLoading(this);
@@ -657,6 +860,7 @@ class _$IsLoadingImpl implements IsLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(GetCatDetail value)? getCatDetail,
+    TResult? Function(GetImages value)? getImagesCat,
     TResult? Function(IsLoading value)? isLoading,
   }) {
     return isLoading?.call(this);
@@ -667,6 +871,7 @@ class _$IsLoadingImpl implements IsLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(GetCatDetail value)? getCatDetail,
+    TResult Function(GetImages value)? getImagesCat,
     TResult Function(IsLoading value)? isLoading,
     required TResult orElse(),
   }) {

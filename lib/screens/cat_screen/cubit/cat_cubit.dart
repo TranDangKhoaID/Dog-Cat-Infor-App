@@ -29,21 +29,4 @@ class CatCubit extends Cubit<CatState> {
       emit(ShowLoading(state.data.copyWith(isLoading: false)));
     }
   }
-
-  /// get image cat
-  // Future<void> getImageCat({
-  //   CatModel? cat,
-  // }) async {
-  //   try {
-  //     emit(ShowLoading(state.data.copyWith(isLoading: true)));
-  //     final image = await catRepository.getImageCat(
-  //       id: cat?.reference_image_id,
-  //     );
-  //     emit(GetImageCat(state.data.copyWith(imageCatModel: image)));
-  //   } catch (e) {
-  //     debugPrint('Error get image cat ==> $e');
-  //   } finally {
-  //     emit(ShowLoading(state.data.copyWith(isLoading: false)));
-  //   }
-  // }
 }

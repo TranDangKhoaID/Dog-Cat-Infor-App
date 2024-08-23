@@ -33,12 +33,35 @@ class _CatScreenState extends State<CatScreen> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _globalKey,
-      appBar: AppBar(
-        title: Text('Breeds'),
-        centerTitle: true,
-        elevation: 0,
-      ),
+      appBar: _buildAppBar(),
       body: _buildBody(),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      title: const Row(
+        children: [
+          CircleAvatar(
+            backgroundImage: AssetImage('assets/icons/cat_icon.png'),
+            radius: 20,
+          ),
+          SizedBox(width: 10),
+          Text(
+            'Cat Pedia',
+          ),
+        ],
+      ),
+      elevation: 0,
+      backgroundColor: ShareColors.kPrimaryColor,
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.search,
+          ),
+        ),
+      ],
     );
   }
 

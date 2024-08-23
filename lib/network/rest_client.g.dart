@@ -57,20 +57,20 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<ImageCatModel> getImageCat({String? id}) async {
+  Future<List<ImageCatModel>> getImagesCat({String? id}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ImageCatModel>(Options(
+    final _options = _setStreamType<List<ImageCatModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/v1/images/${id}',
+          '/v1/images/search?limit=10&breed_ids=${id}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -79,10 +79,12 @@ class _RestClient implements RestClient {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ImageCatModel _value;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<ImageCatModel> _value;
     try {
-      _value = ImageCatModel.fromJson(_result.data!);
+      _value = _result.data!
+          .map((dynamic i) => ImageCatModel.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -13,8 +13,8 @@ abstract class RestClient {
   @GET('/v1/breeds')
   Future<List<CatModel>> getCats();
 
-  @GET('/v1/images/{reference_image_id}')
-  Future<ImageCatModel> getImageCat({
-    @Path('reference_image_id') String? id,
+  @GET('/v1/images/search?limit=10&breed_ids={id}')
+  Future<List<ImageCatModel>> getImagesCat({
+    @Path('id') String? id,
   });
 }

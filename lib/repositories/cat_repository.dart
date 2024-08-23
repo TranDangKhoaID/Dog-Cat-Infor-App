@@ -45,7 +45,7 @@ class CatRepository implements RestClient {
   }
 
   @override
-  Future<ImageCatModel> getImageCat({String? id}) {
-    return _client.getImageCat(id: id);
+  Future<List<ImageCatModel>> getImagesCat({String? id}) {
+    return _client.getImagesCat(id: id);
   }
 }

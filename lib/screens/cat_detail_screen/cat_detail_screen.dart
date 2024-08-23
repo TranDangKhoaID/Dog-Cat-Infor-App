@@ -10,6 +10,7 @@ import 'package:dog_cat_infor/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:insta_image_viewer/insta_image_viewer.dart';
 
 class CatDetailScreen extends StatefulWidget {
   /// MARK: - Initials;
@@ -48,15 +49,11 @@ class _CatDetailScreenState extends State<CatDetailScreen>
           ),
           child: BlocBuilder<CatDetailCubit, CatDetailState>(
             buildWhen: (prev, curr) {
-              return curr is GetCatDetail || curr is IsLoading;
+              return curr is GetCatDetail;
             },
             builder: (context, state) {
               final cat = state.data.catDetail;
-              final isLoading = state.data.isLoading;
-              if (isLoading) {
-                return const CircularProgressIndicator();
-              }
-
+              //
               return SingleChildScrollView(
                 child: Column(
                   children: [
@@ -132,6 +129,51 @@ class _CatDetailScreenState extends State<CatDetailScreen>
                           const SizedBox(height: 10),
                           //attributeTable(),
                           const Divider(),
+                          BlocBuilder<CatDetailCubit, CatDetailState>(
+                            buildWhen: (prev, curr) {
+                              return curr is GetImages || curr is IsLoading;
+                            },
+                            builder: (context, state) {
+                              final items = state.data.images;
+                              final isLoading = state.data.isLoading;
+                              return GridView.builder(
+                                itemCount: items.length,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  mainAxisSpacing: 10,
+                                  crossAxisSpacing: 10,
+                                  crossAxisCount: 2,
+                                ),
+                                itemBuilder: (context, index) {
+                                  if (isLoading) {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
+                                  final model = items[index];
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: InstaImageViewer(
+                                      child: CachedNetworkImage(
+                                        imageUrl: model.url ?? '',
+                                        fit: BoxFit.cover,
+                                        placeholder: (context, url) =>
+                                            const ShimmerImage(),
+                                        errorWidget: (context, url, error) =>
+                                            Image.asset(
+                                          'assets/images/cat.png',
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          const Divider(),
                           TextButton.icon(
                             onPressed: () {},
                             icon: const Icon(Icons.open_in_new),
@@ -177,5 +219,6 @@ class _CatDetailScreenState extends State<CatDetailScreen>
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
     context.read<CatDetailCubit>().getCatDetail(cat: widget.cat);
+    context.read<CatDetailCubit>().getImagesCat(cat: widget.cat);
   }
 }
