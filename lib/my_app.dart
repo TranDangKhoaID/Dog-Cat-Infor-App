@@ -19,7 +19,10 @@ class _MyAppState extends State<MyApp> {
       navigatorKey: Get.key,
       initialRoute: AppRoute.splashScreen,
       //builder: EasyLoading.init(),
-      // theme: AppThemes.lightTheme,
+      theme: ThemeData(
+        useMaterial3: true,
+        fontFamily: 'PlaypenSans',
+      ),
       // darkTheme: AppThemes.darkTheme,
     );
   }
