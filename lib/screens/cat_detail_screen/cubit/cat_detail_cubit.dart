@@ -29,15 +29,16 @@ class CatDetailCubit extends Cubit<CatDetailState> {
     CatModel? cat,
   }) async {
     try {
-      emit(IsLoading(state.data.copyWith(isLoading: true)));
+      //emit(IsLoading(state.data.copyWith(isLoading: true)));
       final images = await catRepository.getImagesCat(
         id: cat?.id,
       );
       emit(GetImages(state.data.copyWith(images: images)));
     } catch (e) {
       debugPrint('Error get image cat ==> $e');
-    } finally {
-      emit(IsLoading(state.data.copyWith(isLoading: false)));
     }
+    // finally {
+    //   emit(IsLoading(state.data.copyWith(isLoading: false)));
+    // }
   }
 }

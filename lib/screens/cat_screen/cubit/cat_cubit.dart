@@ -1,3 +1,4 @@
+import 'package:dog_cat_infor/common/share_obs.dart';
 import 'package:dog_cat_infor/locator.dart';
 import 'package:dog_cat_infor/models/cat_model.dart';
 import 'package:dog_cat_infor/models/image_cat_model.dart';
@@ -19,8 +20,8 @@ class CatCubit extends Cubit<CatState> {
   Future<void> getCats() async {
     try {
       emit(ShowLoading(state.data.copyWith(isLoading: true)));
-      //final characterResponse = await dataRepository.getCharacters();
       final cats = await catRepository.getCats();
+      ShareObs.cats.value = cats;
       emit(GetCats(state.data.copyWith(cats: cats)));
       //debugPrint('hê ${characterResponse.characters}');
     } catch (e) {

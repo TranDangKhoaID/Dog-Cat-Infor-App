@@ -6,6 +6,7 @@ import 'package:dog_cat_infor/common/share_color.dart';
 import 'package:dog_cat_infor/extensions/strings.dart';
 import 'package:dog_cat_infor/screens/cat_detail_screen/cat_detail_screen.dart';
 import 'package:dog_cat_infor/screens/cat_screen/cubit/cat_cubit.dart';
+import 'package:dog_cat_infor/screens/cat_screen/search_cat_delegate.dart';
 import 'package:dog_cat_infor/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,7 +57,10 @@ class _CatScreenState extends State<CatScreen> with AfterLayoutMixin {
       backgroundColor: ShareColors.kPrimaryColor,
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () => showSearch(
+            context: Get.context!,
+            delegate: SearchCatDelegate(),
+          ),
           icon: const Icon(
             Icons.search,
           ),

@@ -131,7 +131,7 @@ class _CatDetailScreenState extends State<CatDetailScreen>
                           const Divider(),
                           BlocBuilder<CatDetailCubit, CatDetailState>(
                             buildWhen: (prev, curr) {
-                              return curr is GetImages || curr is IsLoading;
+                              return curr is GetImages;
                             },
                             builder: (context, state) {
                               final items = state.data.images;
@@ -147,11 +147,11 @@ class _CatDetailScreenState extends State<CatDetailScreen>
                                   crossAxisCount: 2,
                                 ),
                                 itemBuilder: (context, index) {
-                                  if (isLoading) {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  }
+                                  // if (isLoading) {
+                                  //   return const Center(
+                                  //     child: CircularProgressIndicator(),
+                                  //   );
+                                  // }
                                   final model = items[index];
                                   return ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
