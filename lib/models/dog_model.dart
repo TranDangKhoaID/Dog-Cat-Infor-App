@@ -8,7 +8,7 @@ class DogModel {
   WeightModel? weight;
   int? id;
   String? name;
-  String? breed_for;
+  String? bred_for;
   String? breed_group;
   String? temperament;
   String? life_span;
@@ -19,7 +19,7 @@ class DogModel {
     this.weight,
     this.id,
     this.name,
-    this.breed_for,
+    this.bred_for,
     this.breed_group,
     this.temperament,
     this.life_span,

@@ -20,7 +20,7 @@ class CatDetailCubit extends Cubit<CatDetailState> {
     try {
       emit(GetCatDetail(state.data.copyWith(catDetail: cat)));
     } catch (e) {
-      debugPrint('Get product detail error: $e');
+      debugPrint('Get cat detail error: $e');
     }
   }
 

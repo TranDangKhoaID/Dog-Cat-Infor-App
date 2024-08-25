@@ -4,10 +4,14 @@ import 'package:after_layout/after_layout.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_cat_infor/common/share_color.dart';
 import 'package:dog_cat_infor/extensions/strings.dart';
+import 'package:dog_cat_infor/screens/dog_detail_screen/dog_detail_screen.dart';
 import 'package:dog_cat_infor/screens/dog_screen/cubit/dog_cubit.dart';
+import 'package:dog_cat_infor/screens/dog_screen/search_dog_delegate.dart';
 import 'package:dog_cat_infor/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class DogScreen extends StatefulWidget {
   static BlocProvider<DogCubit> provider() {
@@ -64,13 +68,13 @@ class _DogScreenState extends State<DogScreen> with AfterLayoutMixin {
 
             return GestureDetector(
               onTap: () {
-                // showMaterialModalBottomSheet(
-                //   context: Get.context!,
-                //   backgroundColor: Colors.transparent,
-                //   builder: (context) => CatDetailScreen.provider(
-                //     cat: model,
-                //   ),
-                // );
+                showMaterialModalBottomSheet(
+                  context: Get.context!,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) => DogDetailScreen.provider(
+                    dog: model,
+                  ),
+                );
               },
               child: Container(
                 margin: const EdgeInsets.symmetric(
@@ -167,7 +171,10 @@ class _DogScreenState extends State<DogScreen> with AfterLayoutMixin {
       backgroundColor: ShareColors.kPrimaryColor,
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () => showSearch(
+            context: Get.context!,
+            delegate: SearchDogDelegate(),
+          ),
           icon: const Icon(
             Icons.search,
           ),
