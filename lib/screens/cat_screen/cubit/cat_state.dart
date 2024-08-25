@@ -11,6 +11,6 @@ class CatStateData with _$CatStateData {
 @freezed
 class CatState with _$CatState {
   const factory CatState.initial(CatStateData data) = _Initial;
-  const factory CatState.getCharacters(CatStateData data) = GetCats;
+  const factory CatState.getCats(CatStateData data) = GetCats;
   const factory CatState.showLoading(CatStateData data) = ShowLoading;
 }

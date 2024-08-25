@@ -12,6 +12,7 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import 'repositories/cat_repository.dart' as _i500;
+import 'repositories/dog_repository.dart' as _i124;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i174.GetIt $initGetIt(
@@ -25,5 +26,6 @@ _i174.GetIt $initGetIt(
     environmentFilter,
   );
   gh.lazySingleton<_i500.CatRepository>(() => _i500.CatRepository());
+  gh.lazySingleton<_i124.DogRepository>(() => _i124.DogRepository());
   return getIt;
 }

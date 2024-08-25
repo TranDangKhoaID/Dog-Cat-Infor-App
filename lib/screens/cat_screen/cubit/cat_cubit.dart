@@ -25,7 +25,7 @@ class CatCubit extends Cubit<CatState> {
       emit(GetCats(state.data.copyWith(cats: cats)));
       //debugPrint('hê ${characterResponse.characters}');
     } catch (e) {
-      debugPrint('Error get characters ==> $e');
+      debugPrint('Error get cats ==> $e');
     } finally {
       emit(ShowLoading(state.data.copyWith(isLoading: false)));
     }

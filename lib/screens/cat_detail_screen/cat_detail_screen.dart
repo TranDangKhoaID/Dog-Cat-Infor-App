@@ -129,50 +129,7 @@ class _CatDetailScreenState extends State<CatDetailScreen>
                           const SizedBox(height: 10),
                           //attributeTable(),
                           const Divider(),
-                          BlocBuilder<CatDetailCubit, CatDetailState>(
-                            buildWhen: (prev, curr) {
-                              return curr is GetImages;
-                            },
-                            builder: (context, state) {
-                              final items = state.data.images;
-                              final isLoading = state.data.isLoading;
-                              return GridView.builder(
-                                itemCount: items.length,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisSpacing: 10,
-                                  crossAxisSpacing: 10,
-                                  crossAxisCount: 2,
-                                ),
-                                itemBuilder: (context, index) {
-                                  // if (isLoading) {
-                                  //   return const Center(
-                                  //     child: CircularProgressIndicator(),
-                                  //   );
-                                  // }
-                                  final model = items[index];
-                                  return ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: InstaImageViewer(
-                                      child: CachedNetworkImage(
-                                        imageUrl: model.url ?? '',
-                                        fit: BoxFit.cover,
-                                        placeholder: (context, url) =>
-                                            const ShimmerImage(),
-                                        errorWidget: (context, url, error) =>
-                                            Image.asset(
-                                          'assets/images/cat.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
+                          images(),
                           const Divider(),
                           TextButton.icon(
                             onPressed: () {},
@@ -189,6 +146,50 @@ class _CatDetailScreenState extends State<CatDetailScreen>
           ),
         ),
       ),
+    );
+  }
+
+  BlocBuilder<CatDetailCubit, CatDetailState> images() {
+    return BlocBuilder<CatDetailCubit, CatDetailState>(
+      buildWhen: (prev, curr) {
+        return curr is GetImages;
+      },
+      builder: (context, state) {
+        final items = state.data.images;
+        //final isLoading = state.data.isLoading;
+        return GridView.builder(
+          itemCount: items.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            crossAxisCount: 2,
+          ),
+          itemBuilder: (context, index) {
+            // if (isLoading) {
+            //   return const Center(
+            //     child: CircularProgressIndicator(),
+            //   );
+            // }
+            final model = items[index];
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: InstaImageViewer(
+                child: CachedNetworkImage(
+                  imageUrl: model.url ?? '',
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => const ShimmerImage(),
+                  errorWidget: (context, url, error) => Image.asset(
+                    'assets/images/cat.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 

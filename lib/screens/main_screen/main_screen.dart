@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:dog_cat_infor/screens/cat_screen/cat_screen.dart';
+import 'package:dog_cat_infor/screens/dog_screen/dog_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,9 +35,7 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
   /// MARK: - Initials;
   final screens = [
     CatScreen.provider(),
-    Container(
-      color: Colors.green,
-    ),
+    DogScreen.provider(),
     Container(
       color: Colors.blue,
     )

@@ -8,13 +8,13 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class CatRepository implements RestClient {
+class DogRepository implements RestClient {
   /// MARK: - Initials;
   final dio = Dio();
   late RestClient _client;
   //final _appPref = locator<AppPreference>();
 
-  CatRepository() {
+  DogRepository() {
     if (kDebugMode) {
       dio.interceptors.add(LogInterceptor(
         requestBody: true,
@@ -31,13 +31,13 @@ class CatRepository implements RestClient {
           //debugPrint('Authorization token: ${'Bearer $token'}');
           //request.headers['Authorization'] = 'Bearer $token';
           request.headers['Accept'] = 'application/json';
-          request.headers['x-api-key'] = Configs.catApiKey;
+          request.headers['x-api-key'] = Configs.dogApiKey;
           handler.next(request);
         },
       ),
     );
 
-    _client = RestClient(dio, baseUrl: Configs.catBaseUrl);
+    _client = RestClient(dio, baseUrl: Configs.dogBaseUrl);
   }
 
   @override

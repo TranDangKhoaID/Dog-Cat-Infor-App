@@ -4,30 +4,26 @@ import 'package:after_layout/after_layout.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_cat_infor/common/share_color.dart';
 import 'package:dog_cat_infor/extensions/strings.dart';
-import 'package:dog_cat_infor/screens/cat_detail_screen/cat_detail_screen.dart';
-import 'package:dog_cat_infor/screens/cat_screen/cubit/cat_cubit.dart';
-import 'package:dog_cat_infor/screens/cat_screen/search_cat_delegate.dart';
+import 'package:dog_cat_infor/screens/dog_screen/cubit/dog_cubit.dart';
 import 'package:dog_cat_infor/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class CatScreen extends StatefulWidget {
-  static BlocProvider<CatCubit> provider() {
+class DogScreen extends StatefulWidget {
+  static BlocProvider<DogCubit> provider() {
     return BlocProvider(
-      create: (context) => CatCubit(),
-      child: const CatScreen(),
+      create: (context) => DogCubit(),
+      child: const DogScreen(),
     );
   }
 
-  const CatScreen({super.key});
+  const DogScreen({super.key});
 
   @override
-  State<CatScreen> createState() => _CatScreenState();
+  State<DogScreen> createState() => _DogScreenState();
 }
 
-class _CatScreenState extends State<CatScreen> with AfterLayoutMixin {
+class _DogScreenState extends State<DogScreen> with AfterLayoutMixin {
   /// MARK: - Initials;
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
   @override
@@ -39,43 +35,18 @@ class _CatScreenState extends State<CatScreen> with AfterLayoutMixin {
     );
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: const Row(
-        children: [
-          CircleAvatar(
-            backgroundImage: AssetImage('assets/icons/cat_icon.png'),
-            radius: 20,
-          ),
-          SizedBox(width: 10),
-          Text(
-            'Cat Pedia',
-          ),
-        ],
-      ),
-      elevation: 0,
-      backgroundColor: ShareColors.kPrimaryColor,
-      actions: [
-        IconButton(
-          onPressed: () => showSearch(
-            context: Get.context!,
-            delegate: SearchCatDelegate(),
-          ),
-          icon: const Icon(
-            Icons.search,
-          ),
-        ),
-      ],
-    );
+  @override
+  FutureOr<void> afterFirstLayout(BuildContext context) {
+    context.read<DogCubit>().getDogs();
   }
 
-  BlocBuilder<CatCubit, CatState> _buildBody() {
-    return BlocBuilder<CatCubit, CatState>(
+  BlocBuilder<DogCubit, DogState> _buildBody() {
+    return BlocBuilder<DogCubit, DogState>(
       buildWhen: (prev, curr) {
-        return curr is GetCats || curr is ShowLoading;
+        return curr is GetDogs || curr is ShowLoading;
       },
       builder: (context, state) {
-        final items = state.data.cats;
+        final items = state.data.dogs;
         final isLoading = state.data.isLoading;
         return GridView.builder(
           padding: const EdgeInsets.all(10),
@@ -93,13 +64,13 @@ class _CatScreenState extends State<CatScreen> with AfterLayoutMixin {
 
             return GestureDetector(
               onTap: () {
-                showMaterialModalBottomSheet(
-                  context: Get.context!,
-                  backgroundColor: Colors.transparent,
-                  builder: (context) => CatDetailScreen.provider(
-                    cat: model,
-                  ),
-                );
+                // showMaterialModalBottomSheet(
+                //   context: Get.context!,
+                //   backgroundColor: Colors.transparent,
+                //   builder: (context) => CatDetailScreen.provider(
+                //     cat: model,
+                //   ),
+                // );
               },
               child: Container(
                 margin: const EdgeInsets.symmetric(
@@ -121,7 +92,7 @@ class _CatScreenState extends State<CatScreen> with AfterLayoutMixin {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: CachedNetworkImage(
-                              imageUrl: getCatUrlImageJPG(
+                              imageUrl: getDogUrlImageJPG(
                                 id: model.reference_image_id ?? '',
                               ),
                               fit: BoxFit.cover,
@@ -178,8 +149,30 @@ class _CatScreenState extends State<CatScreen> with AfterLayoutMixin {
     );
   }
 
-  @override
-  FutureOr<void> afterFirstLayout(BuildContext context) {
-    context.read<CatCubit>().getCats();
+  AppBar _buildAppBar() {
+    return AppBar(
+      title: const Row(
+        children: [
+          CircleAvatar(
+            backgroundImage: AssetImage('assets/icons/cat_icon.png'),
+            radius: 20,
+          ),
+          SizedBox(width: 10),
+          Text(
+            'Dog Pedia',
+          ),
+        ],
+      ),
+      elevation: 0,
+      backgroundColor: ShareColors.kPrimaryColor,
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.search,
+          ),
+        ),
+      ],
+    );
   }
 }
