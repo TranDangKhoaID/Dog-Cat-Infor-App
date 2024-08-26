@@ -33,6 +33,7 @@ class _CatScreenState extends State<CatScreen> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       key: _globalKey,
       appBar: _buildAppBar(),
       body: _buildBody(),

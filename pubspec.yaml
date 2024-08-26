@@ -39,6 +39,7 @@ dependencies:
   adaptive_theme: ^3.6.0
   modal_bottom_sheet: ^3.0.0
   insta_image_viewer: ^1.0.4
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:

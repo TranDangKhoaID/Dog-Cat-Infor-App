@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:after_layout/after_layout.dart';
 import 'package:dog_cat_infor/screens/cat_screen/cat_screen.dart';
 import 'package:dog_cat_infor/screens/dog_screen/dog_screen.dart';
+import 'package:dog_cat_infor/screens/setting_screen/setting_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,9 +37,7 @@ class _MainScreenState extends State<MainScreen> with AfterLayoutMixin {
   final screens = [
     CatScreen.provider(),
     DogScreen.provider(),
-    Container(
-      color: Colors.blue,
-    )
+    SettingScreen(),
   ];
 
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
