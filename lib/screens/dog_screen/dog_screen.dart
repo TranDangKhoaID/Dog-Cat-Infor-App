@@ -158,7 +158,7 @@ class _DogScreenState extends State<DogScreen> with AfterLayoutMixin {
       title: const Row(
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage('assets/icons/cat_icon.png'),
+            backgroundImage: AssetImage('assets/icons/logo.png'),
             radius: 20,
           ),
           SizedBox(width: 10),
